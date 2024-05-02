@@ -1,0 +1,56 @@
+import users from '../model/user.model'
+import telefones from '../model/telefoneUser.model'
+import bcrypt from 'bcrypt'
+import { Model } from 'sequelize'
+
+export interface infoTipo extends Model {
+    id: number;
+    nome: string;
+    email: string;
+    senha: string;
+    cod: number; 
+    telefone: number; 
+}
+
+export class repositoryUser{
+
+   static createUser= async (infUser: infoTipo) => {
+    try{
+        const { nome, email, senha, cod, telefone } = infUser
+    
+        const salt = await bcrypt.genSalt(12);
+        const senhaHash = await bcrypt.hash(senha, salt);
+    
+        const newUser = await users.create({
+            id_cargo: 2,
+            nome: nome,
+            email: email,
+            senha: senhaHash
+        })
+    
+        const encontrarIdUser = await users.findOne({
+            where: {
+                email: email
+            }
+        }) as infoTipo
+
+        const idUser = encontrarIdUser ? encontrarIdUser.id: null
+
+        await telefones.create({
+            id_user: idUser,
+            cod: cod,
+            tel_num: telefone
+        })
+
+        return newUser
+
+        }catch(err) {
+            return console.log("um erro ao criar usuario: " + err)
+        }
+    }
+
+
+}
+
+
+
