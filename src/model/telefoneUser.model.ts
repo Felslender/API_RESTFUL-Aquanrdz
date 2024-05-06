@@ -1,4 +1,5 @@
 import  Sequelize  from "sequelize";
+import  users  from '../model/user.model'
 import db from '../db/configs';
 
 
@@ -15,7 +16,7 @@ const telefones = db.define('telefones', {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'users',
+            model: users,
             key: 'id'
         }
     },
@@ -29,8 +30,11 @@ const telefones = db.define('telefones', {
         type: Sequelize.BIGINT,
         allowNull: false,
     },
+},
+    {
+        timestamps: false 
+    }
 
-
-})
+)
 
 export default telefones;

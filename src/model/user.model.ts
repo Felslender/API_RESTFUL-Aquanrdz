@@ -35,10 +35,12 @@ const users = db.define('users', {
         type: Sequelize.STRING,
         allowNull: false,
     }
-}, 
+    
+    }, 
 
-{
-    timestamps: false 
-});
+    {
+        timestamps: false 
+    }
+);
 
 export default users;

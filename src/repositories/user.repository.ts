@@ -3,6 +3,7 @@ import telefones from '../model/telefoneUser.model'
 import bcrypt from 'bcrypt'
 import { Model } from 'sequelize'
 
+
 export interface infoTipo extends Model {
     id: number;
     nome: string;
@@ -10,11 +11,13 @@ export interface infoTipo extends Model {
     senha: string;
     cod: number; 
     telefone: number; 
+    id_cargo: number;
 }
+
 
 export class repositoryUser{
 
-   static createUser= async (infUser: infoTipo) => {
+   static createUser = async (infUser: infoTipo) => {
     try{
         const { nome, email, senha, cod, telefone } = infUser
     
@@ -48,6 +51,8 @@ export class repositoryUser{
             return console.log("um erro ao criar usuario: " + err)
         }
     }
+
+
 
 
 }

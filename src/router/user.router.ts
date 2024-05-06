@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { createdUser } from '../controller/user.controller'
+import { userController } from '../controller/user.controller'
+import { controllerLogin } from '../controller/user.login.controller';
 import { userMiddleware } from '../middleware/userMiddleware';
 
 const userRouter = Router()
 
-userRouter.post('/user', userMiddleware.encontrarEmail ,createdUser);
-
+userRouter.post('/login', controllerLogin.login);
+userRouter.post('/user', userMiddleware.encontrarEmail, userController.createdUser);
 
 
 export default userRouter
