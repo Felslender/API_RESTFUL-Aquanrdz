@@ -1,10 +1,11 @@
 import users from '../model/user.model'
+import cargos from '../model/cargos.model'
 import telefones from '../model/telefoneUser.model'
 import bcrypt from 'bcrypt'
 import { Model } from 'sequelize'
 
 
-export interface infoTipo extends Model {
+export interface infoTipo extends Model{
     id: number;
     nome: string;
     email: string;
@@ -14,13 +15,12 @@ export interface infoTipo extends Model {
     id_cargo: number;
 }
 
-
 export class repositoryUser{
 
    static createUser = async (infUser: infoTipo) => {
     try{
         const { nome, email, senha, cod, telefone } = infUser
-    
+
         const salt = await bcrypt.genSalt(12);
         const senhaHash = await bcrypt.hash(senha, salt);
     

@@ -8,6 +8,7 @@ export class controllerLogin{
     static login: RequestHandler = async(req, res, next) => {
 
         try{
+
             const token = await userLogin.userToken(req.body);
 
             if(token === null){
@@ -15,6 +16,7 @@ export class controllerLogin{
             }
 
             return res.status(200).json({msg: "login feito! = " + token});
+            
         }catch(err){
             return res.status(500).json({msg: "erro no controller login " + err})
         }

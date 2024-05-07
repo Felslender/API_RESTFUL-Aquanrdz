@@ -1,9 +1,35 @@
 import { RequestHandler } from 'express';
 import users from '../model/user.model';
+import cargos from '../model/cargos.model';
 import { infoTipo } from '../repositories/user.repository';
 
 
 export class userMiddleware {
+
+    static verificarCargos: RequestHandler = async (req, res, next) => {
+
+        const verificarCargo = await cargos.findAll({
+            where: {
+                id: [1, 2]
+            }
+        })
+
+        console.log(verificarCargo)
+
+        if (verificarCargo.length <= 1) {
+            const newCargo1 = await cargos.create({
+                nome_cargo: "adm"
+            })
+
+            const newCargo2 = await cargos.create({
+                nome_cargo: "user"
+            })
+
+        }
+
+        next();
+    }
+
 
     static encontrarEmail: RequestHandler = async(req, res, next) => {
 

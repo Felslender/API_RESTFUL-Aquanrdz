@@ -1,4 +1,4 @@
-import  users  from '../model/user.model'
+import users  from '../model/user.model'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { infoTipo } from './user.repository'
@@ -11,15 +11,14 @@ export class userLogin{
         try{
             const { email, senha } = infoUser
 
-            const userInfos: infoTipo |  null = await users.findOne({
+            const userInfos: infoTipo = await users.findOne({
                 where: {
                     email: email
                 }
             })
 
             if (!userInfos) {
-                console.log("Usuário não encontrado");
-                return null;
+                
             }
 
             console.log("email:" + userInfos.email)
@@ -37,7 +36,9 @@ export class userLogin{
                     SECRET,
                     {expiresIn: '1h'}
                 )
+                
                 return token
+
             }else{
                 throw new Error("Credenciais inválidas");
             }
