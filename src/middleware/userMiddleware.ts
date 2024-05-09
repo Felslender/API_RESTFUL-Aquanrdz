@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import users from '../model/user.model';
 import cargos from '../model/cargos.model';
-import { infoTipo } from '../repositories/user.repository';
+import { User } from '../repositories/user.repository';
 
 
 export class userMiddleware {
@@ -24,7 +24,6 @@ export class userMiddleware {
             const newCargo2 = await cargos.create({
                 nome_cargo: "user"
             })
-
         }
 
         next();
@@ -39,7 +38,7 @@ export class userMiddleware {
             where: {
                 email: email
             }
-        }) as infoTipo
+        }) as User
 
         const tipoEmail = encontrarEmail ? encontrarEmail.email: null
 

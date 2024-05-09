@@ -1,11 +1,10 @@
 import users from '../model/user.model'
-import cargos from '../model/cargos.model'
 import telefones from '../model/telefoneUser.model'
 import bcrypt from 'bcrypt'
-import { Model } from 'sequelize'
+import { Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
 
 
-export interface infoTipo extends Model{
+type UserAttributes = {
     id: number;
     nome: string;
     email: string;
@@ -13,11 +12,23 @@ export interface infoTipo extends Model{
     cod: number; 
     telefone: number; 
     id_cargo: number;
+};
+
+
+export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+    declare id: CreationOptional<number>;
+    declare nome: string;
+    declare email: string;
+    declare senha: string;
+    declare cod: number; 
+    declare telefone: number; 
+    declare id_cargo: number;
 }
+
 
 export class repositoryUser{
 
-   static createUser = async (infUser: infoTipo) => {
+   static createUser = async (infUser: User): Promise<User | null> => {
     try{
         const { nome, email, senha, cod, telefone } = infUser
 
@@ -29,13 +40,13 @@ export class repositoryUser{
             nome: nome,
             email: email,
             senha: senhaHash
-        })
+        }) as User
     
         const encontrarIdUser = await users.findOne({
             where: {
                 email: email
             }
-        }) as infoTipo
+        }) as User
 
         const idUser = encontrarIdUser ? encontrarIdUser.id: null
 
@@ -45,10 +56,11 @@ export class repositoryUser{
             tel_num: telefone
         })
 
+
         return newUser
 
         }catch(err) {
-            return console.log("um erro ao criar usuario: " + err)
+            throw err
         }
     }
 

@@ -1,27 +1,25 @@
 import users  from '../model/user.model'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { infoTipo } from './user.repository'
+import { User } from './user.repository'
 
 const SECRET = process.env.SECRET ?? ''; 
 
 export class userLogin{
 
-    static userToken = async (infoUser: infoTipo): Promise<string | null> => {
+    static userToken = async (infoUser: User): Promise<string | null> => {
         try{
             const { email, senha } = infoUser
 
-            const userInfos: infoTipo = await users.findOne({
+            const userInfos = await users.findOne({
                 where: {
                     email: email
                 }
-            })
+            }) as User
 
             if (!userInfos) {
-                
+                return null
             }
-
-            console.log("email:" + userInfos.email)
 
             const senhaHashed = userInfos.senha;
             const senhaMatch = await bcrypt.compare(senha, senhaHashed)

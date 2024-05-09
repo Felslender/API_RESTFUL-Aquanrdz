@@ -1,6 +1,5 @@
 import { RequestHandler } from "express";
 import { repositoryUser } from "../repositories/user.repository";
-import { create } from "domain";
 
 
 export class userController{
