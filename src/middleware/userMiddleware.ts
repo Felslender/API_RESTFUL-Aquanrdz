@@ -16,7 +16,7 @@ export class userMiddleware {
 
         console.log(verificarCargo)
 
-        if (verificarCargo.length <= 1) {
+        if (verificarCargo.length < 2) {
             const newCargo1 = await cargos.create({
                 nome_cargo: "adm"
             })

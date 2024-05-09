@@ -4,17 +4,6 @@ import bcrypt from 'bcrypt'
 import { Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
 
 
-type UserAttributes = {
-    id: number;
-    nome: string;
-    email: string;
-    senha: string;
-    cod: number; 
-    telefone: number; 
-    id_cargo: number;
-};
-
-
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     declare id: CreationOptional<number>;
     declare nome: string;
