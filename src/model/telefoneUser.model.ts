@@ -1,23 +1,21 @@
 import Sequelize from "sequelize";
-import users from "../model/user.model";
 import db from "../db/configs";
+import usuarios from "./user.model";
 
-const telefones = db.define(
-  "telefones",
-  {
-    id: {
+const telefones = db.define("TELEFONES", {
+    id_telefone: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true,
     },
 
-    id_user: {
+    id_usuario: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {
-        model: users,
-        key: "id",
+        model: usuarios,
+        key: "id_usuario",
       },
     },
 

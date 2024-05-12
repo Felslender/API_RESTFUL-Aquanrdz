@@ -26,7 +26,7 @@ export class userLogin {
       if (senhaMatch) {
         const token = jwt.sign(
           {
-            userId: userInfos.id,
+            userId: userInfos.id_usuario,
             email: userInfos.email,
             role: userInfos.id_cargo,
           },

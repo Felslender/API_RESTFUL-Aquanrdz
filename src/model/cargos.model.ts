@@ -1,8 +1,8 @@
 import Sequelize from "sequelize";
 import db from "../db/configs";
 
-const cargos = db.define("cargos", {
-  id: {
+const cargos = db.define("CARGOS", {
+  id_cargo: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
@@ -13,6 +13,10 @@ const cargos = db.define("cargos", {
     type: Sequelize.STRING(30),
     allowNull: false,
   },
+},
+{
+  timestamps: false, 
 });
+
 
 export default cargos;

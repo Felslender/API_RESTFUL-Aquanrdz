@@ -22,4 +22,5 @@ export const connect = async () => {
 
 connect();
 
+
 export default db;

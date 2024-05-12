@@ -7,7 +7,7 @@ export class userMiddleware {
   static verificarCargos: RequestHandler = async (req, res, next) => {
     const verificarCargo = await cargos.findAll({
       where: {
-        id: [1, 2],
+        id_cargo: [1, 2],
       },
     });
 
@@ -44,3 +44,4 @@ export class userMiddleware {
     next();
   };
 }
+

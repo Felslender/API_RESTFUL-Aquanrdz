@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-
 import { userLogin } from "../repositories/user.login.repository";
 
 export class controllerLogin {

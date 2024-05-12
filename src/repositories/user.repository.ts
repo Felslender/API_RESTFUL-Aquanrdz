@@ -1,4 +1,4 @@
-import users from "../model/user.model";
+import usuarios from "../model/user.model";
 import telefones from "../model/telefoneUser.model";
 import bcrypt from "bcrypt";
 import {
@@ -8,11 +8,8 @@ import {
   CreationOptional,
 } from "sequelize";
 
-export class User extends Model<
-  InferAttributes<User>,
-  InferCreationAttributes<User>
-> {
-  declare id: CreationOptional<number>;
+export class User extends Model<InferAttributes<User>,InferCreationAttributes<User>> {
+  declare id_usuario: CreationOptional<number>;
   declare nome: string;
   declare email: string;
   declare senha: string;
@@ -29,23 +26,23 @@ export class repositoryUser {
       const salt = await bcrypt.genSalt(12);
       const senhaHash = await bcrypt.hash(senha, salt);
 
-      const newUser = (await users.create({
+      const newUser = (await usuarios.create({
         id_cargo: 2,
         nome: nome,
         email: email,
         senha: senhaHash,
       })) as User;
 
-      const encontrarIdUser = (await users.findOne({
+      const encontrarIdUser = (await usuarios.findOne({
         where: {
           email: email,
         },
       })) as User;
 
-      const idUser = encontrarIdUser ? encontrarIdUser.id : null;
+      const idUser = encontrarIdUser ? encontrarIdUser.id_usuario : null;
 
       await telefones.create({
-        id_user: idUser,
+        id_usuario: idUser,
         cod: cod,
         tel_num: telefone,
       });
@@ -56,3 +53,4 @@ export class repositoryUser {
     }
   };
 }
+

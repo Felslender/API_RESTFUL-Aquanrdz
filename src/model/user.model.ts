@@ -2,10 +2,8 @@ import Sequelize from "sequelize";
 import db from "../db/configs";
 import cargos from "./cargos.model";
 
-const users = db.define(
-  "users",
-  {
-    id: {
+const usuarios = db.define("USUARIOS", {
+    id_usuario: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       allowNull: false,
@@ -17,23 +15,23 @@ const users = db.define(
       allowNull: false,
       references: {
         model: cargos,
-        key: "id",
+        key: "id_cargo",
       },
     },
 
     nome: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(255),
       allowNull: false,
     },
 
     email: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(255),
       allowNull: false,
       unique: true,
     },
 
     senha: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(255),
       allowNull: false,
     },
   },
@@ -43,4 +41,4 @@ const users = db.define(
   }
 );
 
-export default users;
+export default usuarios;
