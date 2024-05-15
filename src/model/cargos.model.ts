@@ -14,6 +14,7 @@ const cargos = db.define("CARGOS", {
     allowNull: false,
   },
 },
+
 {
   timestamps: false, 
 });

@@ -21,9 +21,12 @@ const usu_sistema = db.define("USUARIO_SISTEMA", {
       key: "id_sistema",
     },
   },
-}, {
-  timestamps: false, 
-});
+}, 
+
+  {
+    timestamps: false, 
+  }
+);
 
 
 export default usu_sistema;

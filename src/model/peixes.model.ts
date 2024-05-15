@@ -29,6 +29,7 @@ const peixes = db.define("PEIXES", {
     allowNull: false,
   },
 },
+
 {
   timestamps: false, 
 });

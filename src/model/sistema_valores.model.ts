@@ -29,6 +29,7 @@ const sistema_valores = db.define("SISTEMA_VALORES", {
     allowNull: true,
   },
 },
+
 {
   timestamps: false, 
 });

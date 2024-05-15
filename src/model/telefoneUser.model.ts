@@ -29,6 +29,7 @@ const telefones = db.define("TELEFONES", {
       allowNull: false,
     },
   },
+  
   {
     timestamps: false,
   }

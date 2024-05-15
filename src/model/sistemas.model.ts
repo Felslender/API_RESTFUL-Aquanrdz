@@ -34,6 +34,7 @@ const sistemas = db.define("SISTEMAS", {
     allowNull: false,
   },
 },
+
 {
   timestamps: false, 
 });
