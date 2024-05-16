@@ -7,7 +7,7 @@ export class middlewarePeixe{
     static createPeixe: RequestHandler = async(req, res, next ) => {
 
         try{
-
+            
             var peixesCadastrados = (await peixes.findAll());
         
             if(peixesCadastrados.length < 4){

@@ -12,6 +12,9 @@ export class repositoryUser {
     try {
       const { nome, email, senha, cod, telefone } = infUser;
 
+      const codNumero = Number(cod);
+      const telefoneNumero = Number(telefone);
+
       const salt = await bcrypt.genSalt(12);
       const senhaHash = await bcrypt.hash(senha, salt);
 
@@ -32,8 +35,8 @@ export class repositoryUser {
 
       await telefones.create({
         id_usuario: idUser,
-        cod: cod,
-        tel_num: telefone,
+        cod: codNumero,
+        tel_num: telefoneNumero,
       });
 
       return newUser;
