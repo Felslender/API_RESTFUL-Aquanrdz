@@ -1,9 +1,10 @@
-import usuarios from "../model/user.model";
-import telefones from "../model/telefoneUser.model";
-import sistemas from '../model/sistemas.model'
-import usu_sistema from "../model/usu_sistema.model";
+import usuarios from "../models/user.model";
+import telefones from "../models/telefoneUser.model";
+import sistemas from '../models/sistemas.model'
+import usu_sistema from "../models/usu_sistema.model";
+import peixes from "../models/peixes.model";
 import bcrypt from "bcrypt";
-import { User, Sistema } from "../model/infos.model"
+import { User, Sistema } from "../models/infos.model"
 
 
 export class repositoryUser {
@@ -47,8 +48,7 @@ export class repositoryUser {
 
     try{
       const { id_usuario ,id_peixe, nome_sistema, qto_peixe, tamanho_tanque } = infoSistema;
-
-
+      
       const newSistema = (await sistemas.create(
         {
           id_peixe: id_peixe,

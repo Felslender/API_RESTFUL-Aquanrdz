@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import db from "../db/configs";
+import db from "../config/database";
 import sistemas from "./sistemas.model";
 import usuarios from "./user.model";
 

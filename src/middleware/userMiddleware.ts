@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
-import users from "../model/user.model";
-import cargos from "../model/cargos.model";
-import { User } from "../repositories/user.repository";
+import users from "../models/user.model";
+import cargos from "../models/cargos.model";
+import { User } from "../models/infos.model";
 
 export class userMiddleware {
   static verificarCargos: RequestHandler = async (req, res, next) => {
@@ -41,6 +41,7 @@ export class userMiddleware {
         .json({ msg: "email ja cadastrado, por favor, utilize outro!" });
     }
 
+    
     next();
   };
 }

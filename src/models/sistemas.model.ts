@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import db from "../db/configs";
+import db from "../config/database";
 import peixes from "./peixes.model";
 
 const sistemas = db.define("SISTEMAS", {

@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
-import db from "../db/configs";
-import cargos from "./cargos.model";
+import db from "../config/database";
+import cargos from "../models/cargos.model";
 
 const usuarios = db.define("USUARIOS", {
     id_usuario: {

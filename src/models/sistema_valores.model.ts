@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import db from "../db/configs";
+import db from "../config/database";
 import sistemas from "./sistemas.model";
 
 const sistema_valores = db.define("SISTEMA_VALORES", {

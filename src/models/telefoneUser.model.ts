@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import db from "../db/configs";
+import db from "../config/database";
 import usuarios from "./user.model";
 
 const telefones = db.define("TELEFONES", {

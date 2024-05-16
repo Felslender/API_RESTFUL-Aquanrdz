@@ -1,5 +1,6 @@
 import Sequelize from "sequelize";
-import db from "../db/configs";
+import db from "../config/database";
+
 
 const peixes = db.define("PEIXES", {
   id_peixe: {
@@ -20,12 +21,13 @@ const peixes = db.define("PEIXES", {
   },
 
   media_peso: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.STRING(50),
     allowNull: false,
   },
 
+
   media_tamanho: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.STRING(50),
     allowNull: false,
   },
 },

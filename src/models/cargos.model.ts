@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import db from "../db/configs";
+import db from '../config/database'
 
 const cargos = db.define("CARGOS", {
   id_cargo: {
