@@ -1,7 +1,7 @@
 import users from "../model/user.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { User } from "./user.repository";
+import { User } from "../model/infos.model"
 
 const SECRET = process.env.SECRET ?? "";
 

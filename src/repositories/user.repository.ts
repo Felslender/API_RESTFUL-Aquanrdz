@@ -1,22 +1,10 @@
 import usuarios from "../model/user.model";
 import telefones from "../model/telefoneUser.model";
+import sistemas from '../model/sistemas.model'
+import usu_sistema from "../model/usu_sistema.model";
 import bcrypt from "bcrypt";
-import {
-  Model,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-} from "sequelize";
+import { User, Sistema } from "../model/infos.model"
 
-export class User extends Model<InferAttributes<User>,InferCreationAttributes<User>> {
-  declare id_usuario: CreationOptional<number>;
-  declare nome: string;
-  declare email: string;
-  declare senha: string;
-  declare cod: number;
-  declare telefone: number;
-  declare id_cargo: number;
-}
 
 export class repositoryUser {
   static createUser = async (infUser: User): Promise<User | null> => {
@@ -48,9 +36,63 @@ export class repositoryUser {
       });
 
       return newUser;
+
     } catch (err) {
       throw err;
     }
   };
+
+
+  static createSistema = async (infoSistema: Sistema & User): Promise<Sistema | null> => {
+
+    try{
+      const { id_usuario ,id_peixe, nome_sistema, qto_peixe, tamanho_tanque } = infoSistema;
+
+
+      const newSistema = (await sistemas.create(
+        {
+          id_peixe: id_peixe,
+          nome_sistema: nome_sistema,
+          qto_peixe: qto_peixe,
+          tamanho_tanque: tamanho_tanque,
+      })) as Sistema
+
+      if(newSistema == null){
+        return null
+      }
+
+      const encontrarIdSisetma = (await sistemas.findOne({
+        where: {
+          nome_sistema: nome_sistema
+        }
+      })) as Sistema
+      
+      const idSistema = encontrarIdSisetma ? encontrarIdSisetma.id_sistema : null;
+
+      if(idSistema == null){
+        return null
+      }
+      
+      const atrelarUsuario = (await usu_sistema.create({
+        id_usuario: id_usuario,
+        id_sistema: idSistema,
+      }));
+
+
+      if(!atrelarUsuario){
+        return null
+      }
+
+
+      return newSistema
+
+      }catch (err) {
+        throw err
+      }
+  }
+
+
+
+
 }
 

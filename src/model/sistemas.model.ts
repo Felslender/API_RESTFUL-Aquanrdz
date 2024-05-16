@@ -29,8 +29,8 @@ const sistemas = db.define("SISTEMAS", {
     allowNull: false,
   },
 
-  tamanho_peixe: {
-    type: Sequelize.DECIMAL,
+  tamanho_tanque: {
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
 },

@@ -7,6 +7,6 @@ const userRouter = Router()
 
 userRouter.post('/login', controllerLogin.login);   
 userRouter.post('/user', userMiddleware.verificarCargos, userMiddleware.encontrarEmail, userController.createdUser);
-
+userRouter.post('/sistema', userController.createSistema)
 
 export default userRouter

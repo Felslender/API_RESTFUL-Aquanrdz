@@ -21,4 +21,24 @@ export class userController {
       return res.status(500).json({ msg: "algo inesperado ocorreu" + err });
     }
   };
+
+
+  static createSistema: RequestHandler = async(req, res, next) => {
+    try{
+      const createdSistema = await repositoryUser.createSistema(req.body);
+
+    console.log("seu sistema criado: "+ createdSistema?.nome_sistema)
+
+    if(createdSistema == null){
+      return res.status(404).json({ msg: "algum erro ecorreu, sistema não criado"})
+    }
+
+    return res.status(201).json({msg: "sistema criado com sucesso, seu sistema: "+ createdSistema?.nome_sistema})
+    
+    }catch(err){
+      console.log("algo inesperado aconteceu"+ err)
+    }
+    
+
+  }
 }
