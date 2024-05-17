@@ -2,6 +2,7 @@ import Sequelize from "sequelize";
 import db from "../config/database";
 import sistemas from "./sistemas.model";
 
+
 const sistema_valores = db.define("SISTEMA_VALORES", {
   id_valores: {
     type: Sequelize.INTEGER,
@@ -19,14 +20,26 @@ const sistema_valores = db.define("SISTEMA_VALORES", {
     },
   },
 
-  temperatura: {
-    type: Sequelize.DECIMAL,
+  sensorTemperatura: {
+    type: Sequelize.INTEGER,
     allowNull: true,
   },
 
-  alimentador: {
-    type: Sequelize.DATE,
+  sensorPh: {
+    type: Sequelize.INTEGER,
+    allowNull: true
+  },
+
+  dataAtivacao: {
+    type: Sequelize.DATEONLY,
     allowNull: true,
+    defaultValue: Sequelize.NOW(),
+  },
+
+  horaAtivacao: {
+    type: Sequelize.TIME,
+    allowNull: true,
+    defaultValue: Sequelize.NOW(),
   },
 },
 
