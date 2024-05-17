@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import userRouter from './src/router/user.router'
-import {json} from 'body-parser'
+import { json } from 'express';
+
 
 const app = express();
 
