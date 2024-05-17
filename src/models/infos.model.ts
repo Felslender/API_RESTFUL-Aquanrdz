@@ -21,7 +21,6 @@ export class Sistema extends Model<InferAttributes<Sistema>,InferCreationAttribu
   }
 
 
-  
 export class Peixe extends Model<InferAttributes<Peixe>,InferCreationAttributes<Peixe>> {
   declare id_peixe: CreationOptional<number>;
   declare nome_peixe: number;
