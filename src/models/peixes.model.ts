@@ -21,12 +21,12 @@ const peixes = db.define("PEIXES", {
   },
 
   media_peso: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING(255),
     allowNull: false,
   },
 
   media_tamanho: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING(255),
     allowNull: false,
   },
 },

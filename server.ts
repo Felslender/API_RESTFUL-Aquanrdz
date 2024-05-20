@@ -10,6 +10,8 @@ import peixes from './src/models/peixes.model';
 import mqtt from 'mqtt';
 
 
+
+
 (async () => {
     cargos
     usuarios
@@ -21,7 +23,6 @@ import mqtt from 'mqtt';
     await db.sync();
 })();
 
-const client = mqtt.connect("mqtt://test.mosquitto.org") //conectando com o broker
 
 
 
@@ -29,17 +30,27 @@ app.listen(3000, () => {
     console.log('listening on port 3000')
 })
 
-// recebe o topico
-client.on("connect", () => {
-        client.subscribe("t3mp374tu74A68a", (err) => {
-        if (err) {
-        console.log("Deu erro ai");
-        }
-    });
-});
 
-// trazendo os dados para o console.log
-client.on("message", (topic, message) => {
-    console.log(message.toString());
-    
-});
+// const client = mqtt.connect("mqtt://test.mosquitto.org") //conectando com o broker
+// const topicAlimentador = "4l1m3nt4d0r"
+// const topicTemperatura= "t3mp374tu74A68a"
+
+
+// // recebe o topico
+// client.on("connect", () => {
+//         client.subscribe([topicAlimentador, topicTemperatura], (err) => {
+//         if (err) {
+//         console.log("Erro ao receber dados de temperatura");
+//         }
+//         console.log("Dados de temperatura: conectado com sucesso!")
+//     });
+// });
+
+
+// client.on("message", (topic, message) => {
+//     if (topic === topicAlimentador) {
+//         console.log("alimentador: " + message.toString());
+//     } else if (topic === topicTemperatura) {
+//         console.log("temperatura: " + message.toString());
+//     }
+// });

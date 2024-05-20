@@ -23,8 +23,18 @@ export class Sistema extends Model<InferAttributes<Sistema>,InferCreationAttribu
 
 export class Peixe extends Model<InferAttributes<Peixe>,InferCreationAttributes<Peixe>> {
   declare id_peixe: CreationOptional<number>;
-  declare nome_peixe: number;
+  declare nome_peixe: string;
   declare nome_cient: string;
   declare media_peso: string;
   declare media_tamanho: string;
+}
+
+
+export class sistema_valores extends Model<InferAttributes<Peixe>,InferCreationAttributes<Peixe>> {
+  declare id_valores: CreationOptional<number>;
+  declare id_sistema: number;
+  declare sensorTemperatura: string;
+  declare sensorPh: string;
+  declare dataAtivacao: string;
+  declare horaAtivacao: string;
 }

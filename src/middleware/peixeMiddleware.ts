@@ -5,11 +5,11 @@ import peixes from "../models/peixes.model";
 export class middlewarePeixe{
 
     static createPeixe: RequestHandler = async(req, res, next ) => {
-
         try{
-            
-            var peixesCadastrados = (await peixes.findAll());
-        
+            const peixesCadastrados = (await peixes.findAll());
+
+            console.log(peixesCadastrados.length)
+
             if(peixesCadastrados.length < 4){
                 var newPeixe = (await peixes.create({
                     nome_peixe: "Tilápia",
@@ -17,7 +17,9 @@ export class middlewarePeixe{
                     media_peso: "800g",
                     media_tamanho: "35-50cm",
                 })) as Peixe;
-        
+
+                console.log(newPeixe)
+
                 var newPeixe = (await peixes.create({
                     nome_peixe: "Saint peter",
                     nome_cient: "Oreochromis niloticus",
@@ -38,6 +40,9 @@ export class middlewarePeixe{
                     media_peso: "350gm",
                     media_tamanho: "10-40cm",
                 })) as Peixe;
+
+                
+
             }
 
             next()

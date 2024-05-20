@@ -21,7 +21,7 @@ const sistema_valores = db.define("SISTEMA_VALORES", {
   },
 
   sensorTemperatura: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     allowNull: true,
   },
 
