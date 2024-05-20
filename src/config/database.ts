@@ -9,6 +9,7 @@ const senha = process.env.MYSQL_PASSWORD ?? "";
 const db = new Sequelize(banco, user, senha, {
   dialect: "mysql",
   host: "localhost",
+  timezone: '-03:00',
 });
 
 export const connect = async () => {
