@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "vai": "tsx watch server.ts"
+    "dev": "tsx watch server.ts"
   },
   "author": "Felipe R Cavalcante",
   "license": "ISC",
