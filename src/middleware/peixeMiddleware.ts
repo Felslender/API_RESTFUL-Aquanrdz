@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { Peixe } from "../models/infos.model";
-import peixes from "../models/peixes.model";
+import peixes from "../models/tableModels/peixes.model";
 
 export class middlewarePeixe{
 
@@ -11,14 +11,13 @@ export class middlewarePeixe{
             console.log(peixesCadastrados.length)
 
             if(peixesCadastrados.length < 4){
+
                 var newPeixe = (await peixes.create({
                     nome_peixe: "Tilápia",
                     nome_cient: "Oreochromis niloticus",
                     media_peso: "800g",
                     media_tamanho: "35-50cm",
                 })) as Peixe;
-
-                console.log(newPeixe)
 
                 var newPeixe = (await peixes.create({
                     nome_peixe: "Saint peter",

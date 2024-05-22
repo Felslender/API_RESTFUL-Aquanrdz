@@ -1,11 +1,9 @@
 
 import { sistema_valores } from "../models/infos.model";
-import sistema_valores_tabela from "../models/sistema_valores.model";
+import sistema_valores_tabela from "../models/tableModels/sistemaValores.model";
 
 
-import { temperaturaAtual } from "../config/mqtt";
-
-
+import { temperaturaAtual, listTemp, mediaTemp} from "../config/mqtt";
 
 
 export class repositoryMqtt {
@@ -14,18 +12,19 @@ export class repositoryMqtt {
 
         const { id_sistema } = infoMqtt
 
+
+        console.log(listTemp)
+        console.log(mediaTemp)
+
         const newTemperatura = (await sistema_valores_tabela.create({
             id_sistema: id_sistema,
-            sensorTemperatura: temperaturaAtual,
+            sensorTemperatura: mediaTemp,
             sensorPh: "0"
         })) as sistema_valores
 
         return newTemperatura
 
     }
-
-
-
 }
 
 

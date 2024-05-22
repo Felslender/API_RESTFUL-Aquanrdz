@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
-import users from "../models/user.model";
-import cargos from "../models/cargos.model";
+import users from "../models/tableModels/user.model";
+import cargos from "../models/tableModels/cargos.model";
 import { User } from "../models/infos.model";
 
 export class userMiddleware {

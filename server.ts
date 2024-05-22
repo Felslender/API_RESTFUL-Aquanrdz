@@ -1,14 +1,13 @@
 import app from './app';
 import db from './src/config/database';
-import cargos from './src/models/cargos.model';
-import usuarios from './src/models/user.model';
-import telefones from './src/models/telefoneUser.model';
-import usu_sistema from './src/models/usu_sistema.model';
-import sistemas from './src/models/sistemas.model';
-import sistema_valores from './src/models/sistema_valores.model';
-import peixes from './src/models/peixes.model';
+import cargos from './src/models/tableModels/cargos.model';
+import usuarios from './src/models/tableModels/user.model';
+import telefones from './src/models/tableModels/telefoneUser.model';
+import usu_sistema from './src/models/tableModels/usu_sistema.model';
+import sistemas from './src/models/tableModels/sistemas.model';
+import sistema_valores from './src/models/tableModels/sistemaValores.model';
+import peixes from './src/models/tableModels/peixes.model';
 import mqtt from 'mqtt';
-
 
 
 

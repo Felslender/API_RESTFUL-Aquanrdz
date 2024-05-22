@@ -1,7 +1,7 @@
-import usuarios from "../models/user.model";
-import telefones from "../models/telefoneUser.model";
-import sistemas from '../models/sistemas.model'
-import usu_sistema from "../models/usu_sistema.model";
+import usuarios from "../models/tableModels/user.model";
+import telefones from "../models/tableModels/telefoneUser.model";
+import sistemas from '../models/tableModels/sistemas.model'
+import usu_sistema from "../models/tableModels/usu_sistema.model";
 import bcrypt from "bcrypt";
 import { User, Sistema } from "../models/infos.model"
 
