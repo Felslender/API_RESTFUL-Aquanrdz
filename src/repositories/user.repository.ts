@@ -46,11 +46,12 @@ export class repositoryUser {
   };
 
 
-  static createSistema = async (infoSistema: Sistema & User): Promise<Sistema | null> => {
+  static createSistema = async (infoSistema: Sistema & User, userId: User): Promise<Sistema | null> => {
 
     try{
-      const { id_usuario ,id_peixe, nome_sistema, qto_peixe, tamanho_tanque } = infoSistema;
-      
+      const { id_peixe, nome_sistema, qto_peixe, tamanho_tanque } = infoSistema;
+      const usuarioId = userId
+
       const newSistema = (await sistemas.create(
         {
           id_peixe: id_peixe,
@@ -76,7 +77,7 @@ export class repositoryUser {
       }
       
       const atrelarUsuario = (await usu_sistema.create({
-        id_usuario: id_usuario,
+        id_usuario: usuarioId,
         id_sistema: idSistema,
       }));
 

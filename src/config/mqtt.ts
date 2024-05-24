@@ -32,7 +32,7 @@ client.on("message", async(topic, message) => {
                     listTemp.shift();
                     listTemp.push(temperaturaAtual);
                 }
-                console.log("teste: " + temperaturaAtual)
+                console.log("temperatura recebida: " + temperaturaAtual)
                 soma = listTemp.reduce((acc, temp) => acc + temp, 0);
                 mediaTemp = soma / listTemp.length;
             }

@@ -16,15 +16,17 @@ export class mqttController {
 
     }
 
-    static cadastrarValor: RequestHandler = async(req, res, next) => {
+    static cadastrarValor: RequestHandler = async (req, res, next) => {
+        const infoMqtt = req.body;
 
-        const temperaturaCadastrada = await repositoryMqtt.createTemperatura(req.body)
+        const registrarTemperatura = async () => {
+            const temperaturaCadastrada = await repositoryMqtt.createTemperatura(infoMqtt);
+            console.log("Temperatura cadastrada com sucesso:", temperaturaCadastrada.sensorTemperatura);
+        };
 
-        return res.status(200).json({msg: "temperatura cadastrada com sucesso: " + temperaturaCadastrada?.sensorTemperatura})
+        setInterval(registrarTemperatura, 5000);
 
-
+        res.status(200).json({ msg: "Registro de temperatura iniciado a cada 5 segundos." });
     }
-
-
 
 }

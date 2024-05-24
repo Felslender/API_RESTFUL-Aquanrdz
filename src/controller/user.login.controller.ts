@@ -10,7 +10,7 @@ export class controllerLogin {
         return res.status(403).json({ msg: "credenciais invalidas" });
       }
 
-      return res.status(200).json({ msg: "login feito! = " + token });
+      return res.status(200).json({ token });
     } catch (err) {
       return res.status(500).json({ msg: "erro no controller login " + err });
     }

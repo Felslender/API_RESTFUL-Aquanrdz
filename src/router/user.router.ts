@@ -9,6 +9,6 @@ const userRouter = Router()
 
 userRouter.post('/login', controllerLogin.login);   
 userRouter.post('/user', userMiddleware.verificarCargos, verificarCamposUser.verificarCampoVazio, userMiddleware.encontrarEmail, userController.createdUser);
-userRouter.post('/sistema', middlewarePeixe.createPeixe, userController.createSistema)
+userRouter.post('/sistema', middlewarePeixe.createPeixe, userMiddleware.verificarAcesso, userController.createSistema)
 
 export default userRouter

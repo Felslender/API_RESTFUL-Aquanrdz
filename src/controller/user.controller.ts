@@ -1,5 +1,8 @@
 import { RequestHandler } from "express";
 import { repositoryUser } from "../repositories/user.repository";
+import jwt, {JwtPayload} from "jsonwebtoken";
+
+const SECRET_KEY = process.env.SECRET ?? ""
 
 export class userController {
   static createdUser: RequestHandler = async (req, res, next) => {
@@ -25,9 +28,14 @@ export class userController {
 
   static createSistema: RequestHandler = async(req, res, next) => {
     try{
-      const createdSistema = await repositoryUser.createSistema(req.body);
 
-    console.log("seu sistema criado: "+ createdSistema?.nome_sistema)
+      const authHeader = req.headers.authorization
+
+      const token = authHeader.split(' ')[1];
+      const decodedToken = jwt.verify(token, SECRET_KEY) as JwtPayload;
+      const userId = decodedToken.userId
+      
+      const createdSistema = await repositoryUser.createSistema(req.body, userId);
 
     if(createdSistema == null){
       return res.status(404).json({ msg: "algum erro ecorreu, sistema não criado"})

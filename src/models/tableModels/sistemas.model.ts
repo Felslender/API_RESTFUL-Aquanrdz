@@ -21,7 +21,7 @@ const sistemas = db.define("SISTEMAS", {
 
   nome_sistema: {
     type: Sequelize.STRING(255),
-    allowNull: false,
+    allowNull: true,
   },
 
   qto_peixe: {

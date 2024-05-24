@@ -1,7 +1,11 @@
 import { RequestHandler } from "express";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import users from "../models/tableModels/user.model";
 import cargos from "../models/tableModels/cargos.model";
 import { User } from "../models/infos.model";
+
+
+const SECRET_KEY = process.env.SECRET ?? ""
 
 export class userMiddleware {
   static verificarCargos: RequestHandler = async (req, res, next) => {
@@ -44,5 +48,22 @@ export class userMiddleware {
     
     next();
   };
+
+
+  static verificarAcesso: RequestHandler = async (req, res, next) => {
+
+    const authHeader = req.headers.authorization;
+
+    const token = authHeader.split(' ')[1];
+    const decodedToken = jwt.verify(token, SECRET_KEY) as JwtPayload;
+    const role = decodedToken.role
+  
+    if(role === 2){
+      
+      next()
+    }else {
+      return res.status(404).json({msg: "você não possui acesso a esse serviço"})
+    }
+  }
 }
 
