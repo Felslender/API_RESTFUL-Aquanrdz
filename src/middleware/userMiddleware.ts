@@ -54,6 +54,10 @@ export class userMiddleware {
 
     const authHeader = req.headers.authorization;
 
+    if (!authHeader) {
+      return res.status(401).json({ msg: "Authorization header esta faltando" });
+    }
+
     const token = authHeader.split(' ')[1];
     const decodedToken = jwt.verify(token, SECRET_KEY) as JwtPayload;
     const role = decodedToken.role
