@@ -70,11 +70,11 @@ export class sistemasController {
 
             const sistemasEncontrados = await repositorySistema.sistemasUsuario(userId);
 
-            if(!sistemasEncontrados){
+            if(!sistemasEncontrados || sistemasEncontrados === null){
                 return res.status(404).json({msg: "você não possui nenhum sistema cadastrado" })
             }
 
-            return res.status(200).json({msg: "seus sistemas: ", sistemas: sistemasEncontrados})
+            return res.status(200).json({sistemas: sistemasEncontrados})
         }catch(err){
             return res.status(500).json({msg: "algo ocorreu ao tentar encontrar os peixes cadastrados " + err})
         }

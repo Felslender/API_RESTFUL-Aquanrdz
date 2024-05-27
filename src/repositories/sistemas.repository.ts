@@ -57,7 +57,7 @@ export class repositorySistema {
           }
       }
 
-      
+
     static sistemasUsuario = async (userId: User) => {
         try {
             const encontrarIdSistemas = await usu_sistema.findAll({
@@ -67,7 +67,7 @@ export class repositorySistema {
             });
     
             if (encontrarIdSistemas.length === 0) {
-                return [];
+                return null;
             }
 
             const idSistemas = encontrarIdSistemas.map(item => item.id_sistema);
