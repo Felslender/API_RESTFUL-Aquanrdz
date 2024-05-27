@@ -3,7 +3,7 @@ import { RequestHandler } from "express";
 import { repositoryMqtt } from "../repositories/mqtt.repository";
 
 
-export class mqttController {
+export class controllerMqtt {
 
     static valoresTemperatura: RequestHandler = (req, res, next) => {
         try{
@@ -17,10 +17,9 @@ export class mqttController {
     }
 
     static cadastrarValor: RequestHandler = async (req, res, next) => {
-        const infoMqtt = req.body;
 
         const registrarTemperatura = async () => {
-            const temperaturaCadastrada = await repositoryMqtt.createTemperatura(infoMqtt);
+            const temperaturaCadastrada = await repositoryMqtt.createTemperatura();
             console.log("Temperatura cadastrada com sucesso:", temperaturaCadastrada.sensorTemperatura);
         };
 

@@ -4,7 +4,8 @@ import jwt, {JwtPayload} from "jsonwebtoken";
 
 const SECRET_KEY = process.env.SECRET ?? ""
 
-export class userController {
+export class controllerUser{
+
   static createdUser: RequestHandler = async (req, res, next) => {
     try {
       const createdUser = await repositoryUser.createUser(req.body);
@@ -25,4 +26,36 @@ export class userController {
     }
   };
 
+  static userInfos: RequestHandler = async (req, res, next) => {
+
+    try{
+      const authHeader = req.headers.authorization
+
+      if (!authHeader) {
+        return res.status(401).json({ msg: "Authorization header esta faltando" });
+      }
+
+      const token = authHeader.split(' ')[1];
+      const decodedToken = jwt.verify(token, SECRET_KEY) as JwtPayload;
+      const userId = decodedToken.userId
+
+      const usuarioEncontrado = (await repositoryUser.infoUser(userId)).user
+
+      if(usuarioEncontrado === null){
+        return res.status(401).json({msg: "dados do usuario não encontrado"})
+      }
+
+      const telefoneEncontrado = (await repositoryUser.infoUser(userId)).tel
+
+      if(telefoneEncontrado === null ){
+        return res.status(401).json({msg: "dados de telefone não encontrado"})
+      }
+
+      return res.status(200).json({usuarioEncontrado, telefoneEncontrado})
+
+    }catch(err){
+      return err
+    }
+
+  }
 }

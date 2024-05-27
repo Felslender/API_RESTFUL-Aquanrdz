@@ -3,11 +3,12 @@ import telefones from "../models/tableModels/telefoneUser.model";
 import sistemas from '../models/tableModels/sistemas.model'
 import usu_sistema from "../models/tableModels/usu_sistema.model";
 import bcrypt from "bcrypt";
-import { User, Sistema } from "../models/infos.model"
+import { User, Sistema, Telefone } from "../models/infos.model"
 
 
 export class repositoryUser {
-  static createUser = async (infUser: User): Promise<User | null> => {
+
+  static createUser = async (infUser: User & Telefone): Promise<User | null> => {
     try {
       const { nome, email, senha, cod, telefone } = infUser;
 
@@ -43,9 +44,34 @@ export class repositoryUser {
     } catch (err) {
       throw err;
     }
+
+   
   };
 
+  static infoUser = async(userId: User): Promise<{user: User | null, tel: Telefone | null}> => {
 
+    const idUsuario = userId
+
+    const infos = (await usuarios.findOne({
+      where: {
+        id_usuario: idUsuario
+      }
+    })) as User
+
+
+    const telefoneEncontrado = (await telefones.findOne({
+      where: {
+        id_usuario: idUsuario
+      }
+    })) as Telefone
+
+
+    return {
+      user: infos,
+      tel: telefoneEncontrado
+    }
+
+  }
   
 
 

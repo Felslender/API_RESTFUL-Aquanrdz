@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { sistemasController } from '../controller/sistemas.controller';
+import { controllerSistema } from '../controller/sistemas.controller';
 import { middlewarePeixe } from '../middleware/peixeMiddleware';
 import { userMiddleware } from '../middleware/userMiddleware';
 
@@ -7,8 +7,8 @@ import { userMiddleware } from '../middleware/userMiddleware';
 const sistemasRouter = Router()
 
 
-sistemasRouter.get('/peixes', sistemasController.allPeixes)
-sistemasRouter.get('/sistemas', sistemasController.sistemasUsuario)
-sistemasRouter.post('/sistema', middlewarePeixe.createPeixe, userMiddleware.verificarAcesso, sistemasController.createSistema)
+sistemasRouter.get('/peixes', controllerSistema.allPeixes)
+sistemasRouter.get('/sistemas', controllerSistema.sistemasUsuario)
+sistemasRouter.post('/sistema', middlewarePeixe.createPeixe, userMiddleware.verificarAcesso, controllerSistema.createSistema)
 
 export default sistemasRouter

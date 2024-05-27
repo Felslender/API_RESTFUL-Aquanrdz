@@ -5,7 +5,7 @@ import peixes from "../models/tableModels/peixes.model";
 
 const SECRET_KEY = process.env.SECRET ?? ""
 
-export class sistemasController {
+export class controllerSistema {
 
     static createSistema: RequestHandler = async(req, res, next) => {
         try{

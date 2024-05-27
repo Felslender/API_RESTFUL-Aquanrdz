@@ -6,9 +6,14 @@ export class User extends Model<InferAttributes<User>,InferCreationAttributes<Us
     declare nome: string;
     declare email: string;
     declare senha: string;
-    declare cod: number;
-    declare telefone: number;
     declare id_cargo: number;
+  }
+
+  export class Telefone extends Model<InferAttributes<Telefone>,InferCreationAttributes<Telefone>> {
+    declare id_telefone: CreationOptional<number>;
+    declare id_usuario: number;
+    declare cod: number;
+    declare telefone: number; 
   }
 
 
