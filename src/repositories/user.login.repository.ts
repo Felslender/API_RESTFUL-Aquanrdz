@@ -31,7 +31,7 @@ export class userLogin {
             role: userInfos.id_cargo,
           },
           SECRET,
-          { expiresIn: "1h" }
+          { expiresIn: "23h" }
         );
 
         return token;

@@ -8,6 +8,7 @@ const sistemas = db.define("SISTEMAS", {
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
+    unique: true
   },
 
   id_peixe: {
