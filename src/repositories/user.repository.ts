@@ -46,52 +46,7 @@ export class repositoryUser {
   };
 
 
-  static createSistema = async (infoSistema: Sistema & User, userId: User): Promise<Sistema | null> => {
-
-    try{
-      const { id_peixe, nome_sistema, qto_peixe, tamanho_tanque } = infoSistema;
-      const usuarioId = userId
-
-      const newSistema = (await sistemas.create(
-        {
-          id_peixe: id_peixe,
-          nome_sistema: nome_sistema,
-          qto_peixe: qto_peixe,
-          tamanho_tanque: tamanho_tanque,
-      })) as Sistema
-
-      if(newSistema == null){
-        return null
-      }
-
-      const encontrarIdSisetma = (await sistemas.findOne({
-        where: {
-          nome_sistema: nome_sistema
-        }
-      })) as Sistema
-      
-      const idSistema = encontrarIdSisetma ? encontrarIdSisetma.id_sistema : null;
-
-      if(idSistema == null){
-        return null
-      }
-      
-      const atrelarUsuario = (await usu_sistema.create({
-        id_usuario: usuarioId,
-        id_sistema: idSistema,
-      }));
-
-
-      if(!atrelarUsuario){
-        return null
-      }
-
-      return newSistema
-
-      }catch (err) {
-        throw err
-      }
-  }
+  
 
 
 
