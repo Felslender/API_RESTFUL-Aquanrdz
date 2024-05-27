@@ -38,3 +38,9 @@ export class sistema_valores extends Model<InferAttributes<Peixe>,InferCreationA
   declare dataAtivacao: string;
   declare horaAtivacao: string;
 }
+
+
+export class Usuario_sistema extends Model<InferAttributes<Peixe>,InferCreationAttributes<Peixe>> {
+  declare id_usuario: CreationOptional<number>;
+  declare id_sistema: CreationOptional<number>;
+}

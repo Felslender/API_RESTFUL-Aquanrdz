@@ -7,8 +7,7 @@ import usu_sistema from './src/models/tableModels/usu_sistema.model';
 import sistemas from './src/models/tableModels/sistemas.model';
 import sistema_valores from './src/models/tableModels/sistemaValores.model';
 import peixes from './src/models/tableModels/peixes.model';
-import mqtt from 'mqtt';
-
+import { middlewarePeixe } from './src/middleware/peixeMiddleware';
 
 
 (async () => {

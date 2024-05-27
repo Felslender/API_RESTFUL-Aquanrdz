@@ -8,7 +8,6 @@ export class middlewarePeixe{
         try{
             const peixesCadastrados = (await peixes.findAll());
 
-            console.log(peixesCadastrados.length)
 
             if(peixesCadastrados.length < 4){
 
