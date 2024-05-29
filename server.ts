@@ -1,4 +1,4 @@
-import app from './app';
+import app /*{ httpServer, io }*/ from './app';
 import db from './src/config/database';
 import cargos from './src/models/tableModels/cargos.model';
 import usuarios from './src/models/tableModels/user.model';
@@ -28,4 +28,9 @@ app.listen(3000, () => {
     console.log('listening on port 3000')
 })
 
+// httpServer.listen(3333);
 
+
+// io.on('connection', (socket) => {
+//     console.log(`connection successful  testando: ${socket.id}`);
+// })
