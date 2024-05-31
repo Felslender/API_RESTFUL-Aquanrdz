@@ -1,5 +1,7 @@
 import mqtt from 'mqtt';
+import { io } from '../../app'
 import { repositoryMqtt } from '../repositories/mqtt.repository';
+
 
 const client = mqtt.connect("mqtt://test.mosquitto.org");
 const topicAlimentador = "4l1m3nt4d0r";
@@ -33,21 +35,15 @@ client.on("message", (topic, message) => {
                 listTemp.shift();
                 listTemp.push(temperaturaAtual);
             }
-
             console.log("temperatura recebida: " + temperaturaAtual);
             soma = listTemp.reduce((acc, temp) => acc + temp, 0);
             mediaTemp = soma / listTemp.length;
         } else {
-            
+            // console.log("temperatura não registrada")
         }
     }
 });
 
-const registrarTemperatura = async () => {
-    const temperaturaCadastrada = await repositoryMqtt.createTemperatura();
-    console.log("Temperatura cadastrada com sucesso:", temperaturaCadastrada.sensorTemperatura);
-};
 
-setInterval(registrarTemperatura, 10000);
 
 export { client, temperaturaAtual, listTemp, mediaTemp };

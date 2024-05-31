@@ -1,4 +1,5 @@
-import app /*{ httpServer, io }*/ from './app';
+import { httpServer } from './app';
+import { app } from './app';
 import db from './src/config/database';
 import cargos from './src/models/tableModels/cargos.model';
 import usuarios from './src/models/tableModels/user.model';
@@ -7,7 +8,6 @@ import usu_sistema from './src/models/tableModels/usu_sistema.model';
 import sistemas from './src/models/tableModels/sistemas.model';
 import sistema_valores from './src/models/tableModels/sistemaValores.model';
 import peixes from './src/models/tableModels/peixes.model';
-import { middlewarePeixe } from './src/middleware/peixeMiddleware';
 
 
 (async () => {
@@ -23,14 +23,16 @@ import { middlewarePeixe } from './src/middleware/peixeMiddleware';
 
 
 
-
 app.listen(3000, () => {
     console.log('listening on port 3000')
 })
 
-// httpServer.listen(3333);
 
 
-// io.on('connection', (socket) => {
-//     console.log(`connection successful  testando: ${socket.id}`);
-// })
+
+
+
+
+
+
+
