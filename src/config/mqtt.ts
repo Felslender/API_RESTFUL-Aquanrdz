@@ -1,5 +1,4 @@
 import mqtt from 'mqtt';
-import { io } from '../../app'
 import { repositoryMqtt } from '../repositories/mqtt.repository';
 
 
@@ -28,6 +27,7 @@ client.on("message", (topic, message) => {
     } else if (topic === topicTemperatura) {
         const temperatureValue = parseFloat(message.toString());
         temperaturaAtual = temperatureValue;
+        console.log(temperaturaAtual)
         if (!isNaN(temperatureValue) && temperaturaAtual > 0) {
             if (listTemp.length < 10) {
                 listTemp.push(temperaturaAtual);

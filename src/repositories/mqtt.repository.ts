@@ -4,7 +4,7 @@ import sistema_valores_tabela from "../models/tableModels/sistemaValores.model";
 
 
 import { temperaturaAtual, listTemp, mediaTemp} from "../config/mqtt";
-
+// import { funcMediaTemp, funcTempAtual } from "../config/mqtt";
 
 export class repositoryMqtt {
     static createTemperatura = async () => {
@@ -14,7 +14,7 @@ export class repositoryMqtt {
 
         const newTemperatura = (await sistema_valores_tabela.create({
             id_sistema: 1,
-            sensorTemperatura: mediaTemp,
+            sensorTemperatura: temperaturaAtual,
             sensorPh: "0"
         })) as sistema_valores;
 

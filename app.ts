@@ -8,6 +8,7 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { temperaturaAtual } from './src/config/mqtt';
 import { repositoryMqtt } from './src/repositories/mqtt.repository';
+// import { funcTempAtual, funcMediaTemp } from './src/config/mqtt';
 
 const app = express();
 
@@ -21,15 +22,14 @@ app.use(sistemasRouter);
 const appMqtt = express();
 const httpServer = createServer(appMqtt);
 
-appMqtt.use(cors({ origin: '*' }));
 
+appMqtt.use(cors({ origin: '*' }));
 
 const io = new Server(httpServer, {
   cors: {
     origin: '*',
   },
 });
-
 
 io.on("connection", (socket) => {
   console.log(`connection in ${socket.id}`);
@@ -39,8 +39,9 @@ io.on("connection", (socket) => {
   });
 
   function dados() {
-      console.log(`temperatura que esta retornando do socket: ${temperaturaAtual}°C`)
-      return socket.emit("valores", `Temperatura em: ${temperaturaAtual}°C`);
+      var tempAtual = temperaturaAtual
+      console.log(`temperatura que esta retornando do socket: ${tempAtual}°C`)
+      return socket.emit("valores", `Temperatura em: ${tempAtual}°C`);
   }
 
   const registrarTemperatura = async () => {
@@ -49,8 +50,8 @@ io.on("connection", (socket) => {
       return temperaturaCadastrada.sensorTemperatura
   };
 
-  setInterval(dados, 3000);
-  setInterval(registrarTemperatura, 3000);
+  setInterval(dados, 1000);
+  setInterval(registrarTemperatura, 15000);
 
 });
 
@@ -60,4 +61,4 @@ httpServer.listen(3333, () => {
 
 
 
-export { app, httpServer, io };
+export default app;
