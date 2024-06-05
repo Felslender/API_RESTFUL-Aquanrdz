@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import jwt, {JwtPayload} from "jsonwebtoken";
 import { repositorySistema } from "../repositories/sistemas.repository";
 import peixes from "../models/tableModels/peixes.model";
+import { Sistema } from "../models/infos.model";
 
 const SECRET_KEY = process.env.SECRET ?? ""
 
@@ -78,7 +79,25 @@ export class controllerSistema {
         }catch(err){
             return res.status(500).json({msg: "algo ocorreu ao tentar encontrar os peixes cadastrados " + err})
         }
-        
-
     }
+
+    static sistemaAcessado: RequestHandler = async (req, res, next) => {
+      const id_sistema = Number(req.params.id_sistema);
+    
+      if (isNaN(id_sistema)) {
+        return res.status(400).json({ msg: "ID do sistema inválido" });
+      }
+    
+      try {
+        const sistemaEncontrado = await repositorySistema.sistemaInfo(id_sistema);
+    
+        if (sistemaEncontrado === null) {
+          return res.status(404).json({ msg: "Nenhum sistema encontrado" });
+        }
+    
+        return res.status(200).json({ sistema: sistemaEncontrado });
+      } catch (error) {
+        next(error);
+      }
+    };
 }

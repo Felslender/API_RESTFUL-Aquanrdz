@@ -22,7 +22,6 @@ app.use(sistemasRouter);
 const appMqtt = express();
 const httpServer = createServer(appMqtt);
 
-
 appMqtt.use(cors({ origin: '*' }));
 
 const io = new Server(httpServer, {

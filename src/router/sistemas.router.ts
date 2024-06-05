@@ -10,5 +10,6 @@ const sistemasRouter = Router()
 sistemasRouter.get('/peixes', controllerSistema.allPeixes)
 sistemasRouter.get('/sistemas', controllerSistema.sistemasUsuario)
 sistemasRouter.post('/sistema', middlewarePeixe.createPeixe, userMiddleware.verificarAcesso, controllerSistema.createSistema)
+sistemasRouter.get('/sistema/:id_sistema', controllerSistema.sistemaAcessado)
 
 export default sistemasRouter

@@ -83,9 +83,34 @@ export class repositorySistema {
             return err;
         }
     }
+
+    static sistemaInfo = async (id_sistema: number) => {
+
+      if (typeof id_sistema !== 'number' || isNaN(id_sistema)) {
+        throw new Error('id_sistema não é valido');
+      }
     
+      try {
+        console.log("ID do sistema no repositório:", id_sistema);
+    
+        const sistemaEncontrado = await sistemas.findAll({
+          where: {
+            id_sistema: id_sistema
+          }
+        });
+    
+        if (sistemaEncontrado.length === 0) {
+          return null;
+        }
+    
+        const primeiroEncontrado = sistemaEncontrado[0];
 
-
+        return primeiroEncontrado;
+      } catch (error) {
+        throw error;
+      }
+    };
+    
     static peixesCadastrados = async() => {
 
         const peixesSistema = (await peixes.findAll())
