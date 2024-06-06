@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
 
   function dados() {
       var tempAtual = temperaturaAtual
-      console.log(`temperatura que esta retornando do socket: ${tempAtual}°C`)
+      // console.log(`temperatura que esta retornando do socket: ${tempAtual}°C`)
       return socket.emit("valores", tempAtual);
   }
 
