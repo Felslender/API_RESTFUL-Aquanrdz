@@ -5,7 +5,7 @@ import mqttRouter from './src/router/mqtt.router';
 import { json } from 'express';
 import sistemasRouter from './src/router/sistemas.router';
 import { createServer } from 'http';
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import { temperaturaAtual } from './src/config/mqtt';
 import { repositoryMqtt } from './src/repositories/mqtt.repository';
 // import { funcTempAtual, funcMediaTemp } from './src/config/mqtt';
@@ -30,29 +30,49 @@ const io = new Server(httpServer, {
   },
 });
 
+function dados(socket: Socket) {
+  var tempAtual = temperaturaAtual
+  console.log(`temperatura que esta retornando do socket: ${tempAtual}°C`)
+  return socket.emit("valores", `Temperatura em: ${tempAtual}°C`);
+}
+
+const registrarTemperatura = async () => {
+  const temperaturaCadastrada = await repositoryMqtt.createTemperatura();
+  console.log("Temperatura cadastrada com sucesso:", temperaturaCadastrada.sensorTemperatura);
+  return temperaturaCadastrada.sensorTemperatura
+};
+const onDataHandlers: { [id: string]: () => void } = {}
+const onRegisterHandlers: { [id: string]: () => void } = {}
+
 io.on("connection", (socket) => {
-  console.log(`connection in ${socket.id}`);
+  const { id } = socket;
+  console.log(`connection in ${id}`);
 
   socket.on("front", (message) => {
     console.log(`connection teste: ${message}`);
   });
+  socket.on('disconnect', function () {
+    delete onDataHandlers[id]
+    delete onRegisterHandlers[id]
+  });
+  onDataHandlers[id] = () => { dados(socket) }
+  onRegisterHandlers[id] = () => { registrarTemperatura() }
 
-  function dados() {
-      var tempAtual = temperaturaAtual
-      console.log(`temperatura que esta retornando do socket: ${tempAtual}°C`)
-      return socket.emit("valores", `Temperatura em: ${tempAtual}°C`);
-  }
 
-  const registrarTemperatura = async () => {
-      const temperaturaCadastrada = await repositoryMqtt.createTemperatura();
-      console.log("Temperatura cadastrada com sucesso:", temperaturaCadastrada.sensorTemperatura);
-      return temperaturaCadastrada.sensorTemperatura
-  };
-
-  setInterval(dados, 1000);
-  setInterval(registrarTemperatura, 15000);
 
 });
+
+setInterval(() => {
+  for (const cb of Object.values(onDataHandlers)) {
+    cb()
+  }
+}, 1000);
+
+setInterval(() => {
+  for (const cb of Object.values(onRegisterHandlers)) {
+    cb()
+  }
+}, 15000);
 
 httpServer.listen(3333, () => {
   console.log(`mqtt server listening on 3333`);
