@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
   });
   onDataHandlers[id] = () => { dados(socket) }
   onRegisterHandlers[id] = () => { registrarTemperatura() }
-
+//teste
 
 
 });
