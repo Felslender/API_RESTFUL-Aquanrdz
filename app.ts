@@ -36,13 +36,21 @@ function dados(socket: Socket) {
   return socket.emit("valores", `Temperatura em: ${tempAtual}°C`);
 }
 
+function ultimos_dados(socket: Socket){
+  var dadosCadastrados = repositoryMqtt.getLastRegisters()
+  console.log(`ultimos 6 registros: ${dadosCadastrados}`)
+  return socket.emit(`${dadosCadastrados}` )
+}
+
 const registrarTemperatura = async () => {
   const temperaturaCadastrada = await repositoryMqtt.createTemperatura();
   console.log("Temperatura cadastrada com sucesso:", temperaturaCadastrada.sensorTemperatura);
   return temperaturaCadastrada.sensorTemperatura
 };
+
 const onDataHandlers: { [id: string]: () => void } = {}
 const onRegisterHandlers: { [id: string]: () => void } = {}
+const lastRegisters: { [id: string]: () => void } = {}
 
 io.on("connection", (socket) => {
   const { id } = socket;
@@ -56,9 +64,11 @@ io.on("connection", (socket) => {
     delete onRegisterHandlers[id]
   });
   onDataHandlers[id] = () => { dados(socket) }
+  lastRegisters[id] = () => { ultimos_dados(socket) }
   onRegisterHandlers[id] = () => { registrarTemperatura() }
-//teste
 
+
+//teste
 
 });
 
@@ -73,6 +83,12 @@ setInterval(() => {
     cb()
   }
 }, 15000);
+
+setInterval(() => {
+  for (const cb of Object.values(lastRegisters)) {
+    cb()
+  }
+}, 16000);
 
 httpServer.listen(3333, () => {
   console.log(`mqtt server listening on 3333`);
