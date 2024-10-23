@@ -1,13 +1,13 @@
 import express from 'express';
 import cors from 'cors';
-import userRouter from './router/user.router';
-import mqttRouter from './router/mqtt.router';
+import userRouter from './src/router/user.router';
+import mqttRouter from './src/router/mqtt.router';
 import { json } from 'express';
-import sistemasRouter from './router/sistemas.router';
+import sistemasRouter from './src/router/sistemas.router';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
-import { temperaturaAtual } from './config/mqtt';
-import { repositoryMqtt } from './repositories/mqtt.repository';
+import { temperaturaAtual } from './src/config/mqtt';
+import { repositoryMqtt } from './src/repositories/mqtt.repository';
 // import { funcTempAtual, funcMediaTemp } from './src/config/mqtt';
 
 const app = express();
@@ -18,7 +18,6 @@ app.use(json());
 app.use(userRouter);
 app.use(mqttRouter);
 app.use(sistemasRouter);
-
 const appMqtt = express();
 const httpServer = createServer(appMqtt);
 
