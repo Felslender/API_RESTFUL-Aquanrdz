@@ -1,6 +1,6 @@
 // import { httpServer } from './app';
 // import { app } from './app';
-import app from '../src/app'
+import app from './app'
 import db from './config/database';
 import cargos from './models/tableModels/cargos.model';
 import usuarios from './models/tableModels/user.model';
