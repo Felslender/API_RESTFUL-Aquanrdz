@@ -58,19 +58,20 @@ export class repositorySistema {
       }
 
 
-    static sistemasUsuario = async (userId: User) => {
+      static sistemasUsuario = async (userId: number): Promise<Sistema[] | null> => {
         try {
             const encontrarIdSistemas = await usu_sistema.findAll({
                 where: {
                     id_usuario: userId
-                }
+                },
+                attributes: ['id_sistema'] 
             });
     
             if (encontrarIdSistemas.length === 0) {
                 return null;
             }
-
-            const idSistemas = encontrarIdSistemas.map(item => item.id_sistema);
+    
+            const idSistemas = encontrarIdSistemas.map(item => item.get('id_sistema'));
     
             const encontrarSistemas = await sistemas.findAll({
                 where: {
@@ -78,11 +79,16 @@ export class repositorySistema {
                 }
             });
     
-            return encontrarSistemas;
+            const sistemasConvertidos: Sistema[] = encontrarSistemas.map(sistema => sistema.toJSON() as Sistema);
+    
+            return sistemasConvertidos;
         } catch (err) {
-            return err;
+            console.error(`Erro ao buscar sistemas para o usuário ${userId}:`, err);
+            throw new Error('Erro ao buscar sistemas do usuário');
         }
     }
+    
+    
 
     static sistemaInfo = async (id_sistema: number) => {
 
